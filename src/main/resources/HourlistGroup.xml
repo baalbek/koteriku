@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="koteriku.models.mybatis.HourlistGroupMapper">
+
+
+    <resultMap id="hourlistGroupResultMap"
+               type="koteriku.beans.HourlistGroupBean">
+        <id column="oid" property="id" jdbcType="INTEGER" />
+        <result column="spesifikasjon" property="description"/>
+        <result column="aktiv" property="active"/>
+        <result column="gnr" property="gnr"/>
+        <result column="bnr" property="bnr"/>
+    </resultMap>
+
+    <resultMap id="hourlistGroupBySpecResultMap"
+               type="koteriku.beans.HourlistGroupBean">
+        <result column="spesifikasjon" property="description"/>
+        <result column="sum_timer" property="sumHours"/>
+    </resultMap>
+
+    <select id="selectHourlistGroups" parameterType="Boolean" resultMap="hourlistGroupResultMap">
+        select * from regnskap.timeliste_gruppe
+        <if test="showInactive==false">
+            where aktiv = 'y'
+        </if>
+        order by spesifikasjon
+    </select>
+
+    <select id="selectGroupBySpec" parameterType="Integer" resultMap="hourlistGroupBySpecResultMap">
+        select g.spesifikasjon,sum(t.timer) as sum_timer from regnskap.timeliste_gruppe g join
+        regnskap.timeliste t on t.gruppe=g.oid where t.fnr=#{invoice} group by g.spesifikasjon
+        order by g.spesifikasjon
+    </select>
+
+    <update id="toggleGroup">
+        update regnskap.timeliste_gruppe set aktiv=#{isActive} where oid=#{oid}
+    </update>
+
+    <insert id="insertHourlistGroup"
+            parameterType="koteriku.beans.HourlistGroupBean"
+            useGeneratedKeys="true"
+            keyProperty="id" >
+        insert into regnskap.timeliste_gruppe (spesifikasjon) values (#{description})
+    </insert>
+
+</mapper>

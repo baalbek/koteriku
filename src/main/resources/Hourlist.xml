@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="koteriku.models.mybatis.HourlistMapper">
+
+    <resultMap id="hourlistResultMap"
+               type="koteriku.beans.HourlistBean">
+        <id column="oid" property="oid" jdbcType="INTEGER" />
+        <result column="fnr" property="invoiceNr"/>
+        <result column="dato" property="sqlDate"/>
+        <result column="timer" property="hours"/>
+        <result column="gruppe" property="groupId"/>
+        <result column="fra_klokken" property="fromTime"/>
+        <result column="til_klokken" property="toTime"/>
+        <result column="spesifikasjon" property="description"/>
+    </resultMap>
+
+    <!--
+    oid | fnr |    dato    | timer | gruppe | spesifikasjon | fra_klokken | til_klokken
+    -->
+    <select id="selectLast5" parameterType="map" resultMap="hourlistResultMap">
+        select g.spesifikasjon,t.oid,t.fnr,t.dato,t.timer,t.gruppe,t.fra_klokken,t.til_klokken
+        from regnskap.timeliste t join regnskap.timeliste_gruppe g on g.oid=t.gruppe
+        where t.fnr=#{invoice} order by t.dato desc limit 5
+    </select>
+    <select id="selectAll" parameterType="map" resultMap="hourlistResultMap">
+        select g.spesifikasjon,t.oid,t.fnr,t.dato,t.timer,t.gruppe,t.fra_klokken,t.til_klokken
+        from regnskap.timeliste t join regnskap.timeliste_gruppe g on g.oid=t.gruppe
+        where t.fnr=#{invoice} order by t.dato desc
+    </select>
+
+    <insert id="insertHourlist"
+            parameterType="koteriku.beans.HourlistBean"
+            useGeneratedKeys="true"
+            keyProperty="id" >
+        insert into regnskap.timeliste (fnr, dato, timer, gruppe, fra_klokken, til_klokken)
+        values (#{invoiceNr}, #{sqlDate}, #{hours}, #{groupId}, #{fromTime}, #{toTime})
+    </insert>
+    <update id="updateHourlist"
+        parameterType="koteriku.beans.HourlistBean">
+        update regnskap.timeliste set fnr=#{invoiceNr},dato=#{sqlDate},timer=#{hours},gruppe=#{groupId},
+        fra_klokken=#{fromTime},til_klokken=#{toTime} where oid=#{oid}
+    </update>
+</mapper>

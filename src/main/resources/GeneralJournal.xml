@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="koteriku.models.mybatis.GeneralJournalMapper">
+
+    <!--
+    Column |       Type        |
+    oid    | integer           |
+    bilag  | bilag             |
+    dato   | dato              |
+    debet  | konto             |
+    kredit | konto             |
+    tekst  | kassadagbok_tekst |
+    belop  | penger
+    -->
+
+    <resultMap id="generelJournalResultMap"
+               type="koteriku.beans.GeneralJournalBean">
+        <id column="oid" property="id"/>
+        <result column="bilag" property="bilag"/>
+        <result column="dato" property="transactionDateSql"/>
+        <result column="debit" property="debit"/>
+        <result column="kredit" property="credit"/>
+        <result column="tekst" property="text"/>
+        <result column="belop" property="amount"/>
+    </resultMap>
+
+
+    <select id="selectByBilag" parameterType="map" resultMap="generelJournalResultMap">
+        select * from regnskap.kassadagbok order by bilag desc limit 10
+    </select>
+
+    <select id="selectByDate" parameterType="map" resultMap="generelJournalResultMap">
+        select * from regnskap.kassadagbok order by dato desc limit 10
+    </select>
+
+    <insert id="insertGeneralJournal"
+            parameterType="koteriku.beans.GeneralJournalBean"
+            useGeneratedKeys="true"
+            keyProperty="id" >
+        insert into regnskap.kassadagbok (bilag, dato, debet, kredit, tekst, belop)
+        values (#{bilag}, #{transactionDateSql}, #{debit}, #{credit}, #{text}, #{amount})
+    </insert>
+</mapper>

@@ -1,0 +1,16 @@
+apply plugin: 'java'
+group = 'rcstadheim'
+archivesBaseName = 'koteriku'
+
+version = "$major.$minor.1"
+
+repositories {
+    mavenCentral()
+}
+          
+
+dependencies {
+    compile "log4j:log4j:$log4jVersion"
+    compile "org.mybatis:mybatis:$mybatisVersion"
+    runtime "org.postgresql:postgresql:$postgresVersion"
+}

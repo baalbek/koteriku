@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="koteriku.models.mybatis.InvoiceMapper">
+
+    <resultMap id="invoiceResultMap"
+               type="koteriku.beans.InvoiceBean">
+        <result column="fnr" property="invoiceNum"/>
+        <result column="spesifikasjon" property="description"/>
+        <result column="navn" property="customerName"/>
+    </resultMap>
+
+    <!-- fakturax2
+        oid | fnr | fakturadato |  forfall   | spesifikasjon | navn | fakturasum
+    -->
+    <select id="selectInvoices" parameterType="map" resultMap="invoiceResultMap">
+        select fnr,spesifikasjon,navn from regnskap.fakturax2 where fakturasum is null order by fnr
+    </select>
+    <update id="updateVoucher">
+        update regnskap.faktura set bilag=#{bilag} where fnr=#{fnr}
+    </update>
+</mapper>
