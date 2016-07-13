@@ -12,7 +12,7 @@
         <result column="gruppe" property="groupId"/>
         <result column="fra_klokken" property="fromTime"/>
         <result column="til_klokken" property="toTime"/>
-        <result column="spesifikasjon" property="description"/>
+        <result column="spesifikasjon" property="locationName"/>
     </resultMap>
 
     <!--
