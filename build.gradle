@@ -14,3 +14,9 @@ dependencies {
     compile "org.mybatis:mybatis:$mybatisVersion"
     runtime "org.postgresql:postgresql:$postgresVersion"
 }
+
+def jarFile = new File("$libsDir/koteriku-${version}.jar")
+
+task copyToParentProject(type: Copy, dependsOn: jar) {
+    into parentDist from jarFile
+}
