@@ -12,7 +12,7 @@
         <result column="gruppe" property="groupId"/>
         <result column="fra_klokken" property="fromTime"/>
         <result column="til_klokken" property="toTime"/>
-        <result column="spesifikasjon" property="locationName"/>
+        <result column="spesifikasjon" property="description"/>
     </resultMap>
 
     <!--
@@ -32,7 +32,7 @@
     <insert id="insertHourlist"
             parameterType="koteriku.beans.HourlistBean"
             useGeneratedKeys="true"
-            keyProperty="id" >
+            keyProperty="oid" >
         insert into regnskap.timeliste (fnr, dato, timer, gruppe, fra_klokken, til_klokken)
         values (#{invoiceNr}, #{sqlDate}, #{hours}, #{groupId}, #{fromTime}, #{toTime})
     </insert>

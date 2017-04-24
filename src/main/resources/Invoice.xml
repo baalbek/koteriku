@@ -6,7 +6,7 @@
     <resultMap id="invoiceResultMap"
                type="koteriku.beans.InvoiceBean">
         <result column="fnr" property="invoiceNum"/>
-        <result column="spesifikasjon" property="locationName"/>
+        <result column="spesifikasjon" property="description"/>
         <result column="navn" property="customerName"/>
     </resultMap>
 

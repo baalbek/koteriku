@@ -7,7 +7,7 @@
     <resultMap id="hourlistGroupResultMap"
                type="koteriku.beans.HourlistGroupBean">
         <id column="oid" property="id" jdbcType="INTEGER" />
-        <result column="spesifikasjon" property="locationName"/>
+        <result column="spesifikasjon" property="description"/>
         <result column="aktiv" property="active"/>
         <result column="gnr" property="gnr"/>
         <result column="bnr" property="bnr"/>
