@@ -19,7 +19,7 @@
         <id column="oid" property="id"/>
         <result column="bilag" property="bilag"/>
         <result column="dato" property="transactionDateSql"/>
-        <result column="debit" property="debit"/>
+        <result column="debet" property="debit"/>
         <result column="kredit" property="credit"/>
         <result column="tekst" property="text"/>
         <result column="belop" property="amount"/>
@@ -27,7 +27,7 @@
 
 
     <select id="selectByBilag" parameterType="map" resultMap="generelJournalResultMap">
-        select * from regnskap.kassadagbok order by bilag desc limit 10
+        select * from regnskap.kassadagbok order by bilag desc limit #{numItems}
     </select>
 
     <select id="selectByDate" parameterType="map" resultMap="generelJournalResultMap">

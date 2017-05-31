@@ -90,7 +90,7 @@ public class KoterikuFacade {
         try {
 
             GeneralJournalMapper mapper = session.getMapper(GeneralJournalMapper.class);
-            result = mapper.selectByBilag();
+            result = mapper.selectByBilag(5);
 
         }
         finally {

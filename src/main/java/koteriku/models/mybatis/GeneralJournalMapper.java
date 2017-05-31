@@ -11,7 +11,7 @@ import java.util.List;
  * Time: 11:56 PM
  */
 public interface GeneralJournalMapper {
-    List<GeneralJournalBean> selectByBilag();
+    List<GeneralJournalBean> selectByBilag(int numItems);
     List<GeneralJournalBean> selectByDate();
     void insertGeneralJournal(GeneralJournalBean gjb);
 }
