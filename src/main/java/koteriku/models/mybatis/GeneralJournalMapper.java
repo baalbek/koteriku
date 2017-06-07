@@ -12,6 +12,6 @@ import java.util.List;
  */
 public interface GeneralJournalMapper {
     List<GeneralJournalBean> selectByBilag(int numItems);
-    List<GeneralJournalBean> selectByDate();
+    List<GeneralJournalBean> selectByDate(int numItems);
     void insertGeneralJournal(GeneralJournalBean gjb);
 }

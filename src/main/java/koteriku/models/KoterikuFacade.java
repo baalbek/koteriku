@@ -107,7 +107,7 @@ public class KoterikuFacade {
         try {
 
             GeneralJournalMapper mapper = session.getMapper(GeneralJournalMapper.class);
-            result = mapper.selectByDate();
+            result = mapper.selectByDate(5);
 
         }
         finally {

@@ -31,7 +31,7 @@
     </select>
 
     <select id="selectByDate" parameterType="map" resultMap="generelJournalResultMap">
-        select * from regnskap.kassadagbok order by dato desc limit 10
+        select * from regnskap.kassadagbok order by dato desc limit #{numItems}
     </select>
 
     <insert id="insertGeneralJournal"
