@@ -15,7 +15,7 @@
 
     <resultMap id="hourlistGroupBySpecResultMap"
                type="koteriku.beans.HourlistGroupBean">
-        <result column="spesifikasjon" property="locationName"/>
+        <result column="spesifikasjon" property="description"/>
         <result column="sum_timer" property="sumHours"/>
     </resultMap>
 
@@ -41,7 +41,7 @@
             parameterType="koteriku.beans.HourlistGroupBean"
             useGeneratedKeys="true"
             keyProperty="id" >
-        insert into regnskap.timeliste_gruppe (spesifikasjon) values (#{locationName})
+        insert into regnskap.timeliste_gruppe (spesifikasjon) values (#{description})
     </insert>
 
 </mapper>
